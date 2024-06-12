@@ -1,7 +1,7 @@
 import express from "express";
 import bycrypt from 'bcrypt';
 
-import { createResponseObject, handleErrors, isNullOrUndefined } from "../../common/common";
+import { createResponseObject, handleErrors, isNullOrUndefined, validateBody } from "../../common/common";
 import { queryUserByEmailOrUserName } from "../../database/Users/queryUserByEmailOrUserName";
 import { errorMessages } from "../../errors/errorMessages";
 import { ConflictError, NotFoundError, UnauthorizedError } from "../../errors/error";
@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.post("/login", async (req, res) => {
     try {
-        const { text, password } = validateBody(req);
+        const { text, password } = validateBody(req, ['text', 'password']);
 
         const user: User = await findUser(text, text);
         await validatePassword(password, user.password);
@@ -21,14 +21,6 @@ router.post("/login", async (req, res) => {
         return handleErrors(error, res);
     }
 });
-
-const validateBody = (req: any): any => {
-    const { text, password } = req.body;
-
-    if (isNullOrUndefined(text) || isNullOrUndefined(password)) throw new ConflictError(errorMessages.propertyMissing);
-
-    return { text, password };
-}
 
 const findUser = async (email: string, userName: string): Promise<User> => {
     const user = await queryUserByEmailOrUserName(email, userName) as User;

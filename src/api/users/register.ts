@@ -2,7 +2,7 @@ import express from "express";
 import bycrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 
-import { createResponseObject, handleErrors, isNullOrUndefined } from "../../common/common";
+import { createResponseObject, handleErrors, isNullOrUndefined, validateBody } from "../../common/common";
 import { queryUserByEmailOrUserName } from "../../database/Users/queryUserByEmailOrUserName";
 import { ConflictError, UnprocessableContentError } from "../../errors/error";
 import { User } from "../../types/User/User";
@@ -14,7 +14,7 @@ const router = express.Router();
 
 router.post("/register", async (req, res) => {
     try {
-        const { userName, fullName, email, password } = validateBody(req);
+        const { userName, fullName, email, password } = validateBody(req, ['userName', 'fullName', 'email', 'password']);
 
         await validateNewUsere(email, userName);
         await validateEmail(email);
@@ -28,14 +28,6 @@ router.post("/register", async (req, res) => {
         return handleErrors(error, res);
     }
 });
-
-const validateBody = (req: any): any => {
-    const { userName, fullName, email, password } = req.body;
-
-    if (isNullOrUndefined(userName) || isNullOrUndefined(password) || isNullOrUndefined(fullName) || isNullOrUndefined(email)) throw new ConflictError(errorMessages.propertyMissing);
-
-    return { userName, fullName, email, password };
-}
 
 const validateNewUsere = async (email: string, userName: string) => {
     const user = await queryUserByEmailOrUserName(email, userName);
