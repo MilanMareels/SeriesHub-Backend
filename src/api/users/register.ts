@@ -16,7 +16,7 @@ router.post("/register", async (req, res) => {
     try {
         const { userName, fullName, email, password } = validateBody(req, ['userName', 'fullName', 'email', 'password']);
 
-        await validateNewUsere(email, userName);
+        await validateNewUser(email, userName);
         await validateEmail(email);
 
         const newUser: User = await createNewUser(userName, fullName, email, password);
@@ -29,7 +29,7 @@ router.post("/register", async (req, res) => {
     }
 });
 
-const validateNewUsere = async (email: string, userName: string) => {
+const validateNewUser = async (email: string, userName: string) => {
     const user = await queryUserByEmailOrUserName(email, userName);
 
     if (!isNullOrUndefined(user)) throw new ConflictError(errorMessages.userAlreadyExist);
