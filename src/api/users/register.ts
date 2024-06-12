@@ -53,7 +53,7 @@ const createNewUser = async (userName: string, fullName: string, email: string, 
         fullName: fullName,
         email: email,
         password: await hashPassword(password),
-        accoundCreated: new Date().getTime()
+        accountCreated: new Date().getTime()
     }
 };
 
