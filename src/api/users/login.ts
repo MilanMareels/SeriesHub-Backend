@@ -16,7 +16,7 @@ router.post("/login", async (req, res) => {
         const user: User = await findUser(text, text);
         await validatePassword(password, user.password);
 
-        return createResponseObject(201, user, res);
+        return createResponseObject(200, user, res);
     } catch (error) {
         return handleErrors(error, res);
     }
