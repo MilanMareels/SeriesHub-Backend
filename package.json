@@ -1,15 +1,14 @@
 {
-  "name": "express-api-starter-ts",
+  "name": "serieshub-api",
   "version": "1.2.0",
-  "description": " A basic starter for an express.js API with Typescript",
+  "description": "A backend api for serieshub",
   "main": "src/index.ts",
   "scripts": {
     "start": "ts-node src/index.ts",
     "dev": "nodemon src/index.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "vercel-build": "echo hello"
   },
-  "keywords": [],
-  "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
