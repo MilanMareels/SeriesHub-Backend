@@ -1,6 +1,7 @@
 import express from "express";
 
-import animeSeries from "./anime/getAllAnimeSeries";
+import animeSeries from "./anime/getAllAnimeSeriesOfUser";
+
 import register from "./users/register";
 import login from "./users/login";
 
@@ -12,7 +13,7 @@ router.get("/", (req, res) => {
 	});
 });
 
-// Anime end-points 
+// Anime end-points
 router.use(animeSeries);
 
 // User end-points
