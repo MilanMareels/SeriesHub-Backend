@@ -17,6 +17,7 @@ router.post("/register", async (req, res) => {
     const { userName, fullName, email, password } = validateBody(req, ["userName", "fullName", "email", "password"]);
 
     await validateNewUser(email, userName);
+
     await validateEmail(email);
 
     const newUser: User = await createNewUser(userName, fullName, email, password);
