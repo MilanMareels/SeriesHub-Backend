@@ -14,13 +14,13 @@ const router = express.Router();
 
 router.post("/register", async (req, res) => {
   try {
-    const { userName, fullName, email, password } = validateBody(req, ["userName", "fullName", "email", "password"]);
+    const { userName, email, password } = validateBody(req, ["userName", "email", "password"]);
 
     await validateNewUser(email, userName);
 
     await validateEmail(email);
 
-    const newUser: User = await createNewUser(userName, fullName, email, password);
+    const newUser: User = await createNewUser(userName, email, password);
 
     await queryAddUser(newUser);
 
@@ -49,11 +49,10 @@ const hashPassword = async (password: string) => {
   return await bycrypt.hash(password, 10);
 };
 
-const createNewUser = async (userName: string, fullName: string, email: string, password: string): Promise<User> => {
+const createNewUser = async (userName: string, email: string, password: string): Promise<User> => {
   return {
     userId: uuidv4(),
     userName: userName,
-    fullName: fullName,
     email: email,
     password: await hashPassword(password),
     accountCreated: new Date().getTime(),
