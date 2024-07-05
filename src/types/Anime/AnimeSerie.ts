@@ -1,15 +1,27 @@
 import { ObjectId } from "mongodb";
 
 export interface AnimeSerie {
-	_id: ObjectId;
-	animeId: string;
-	animeTitile: string;
-	genres: string[];
-	description: string;
-	episodes: number;
-	animeStatus: string;
-	userRating: number;
-	image: string;
-	userId: string;
-	listStatus: string;
+  animeId: string;
+  animeTitle: string;
+  description: string;
+  genres: Genre[];
+  animeImage: string;
+  animeTrailer: string;
+  episodes: number;
+  episodesDuration: string;
+  animeStatus: string;
+  userRating: number;
+  userId: string;
+  listStatus: string;
+  animeSeason: string;
+  animeScore: number;
+  animeSource: string;
+  animeFormat: string;
+}
+
+export interface Genre {
+  mal_id: number;
+  type: string;
+  name: string;
+  url: string;
 }
