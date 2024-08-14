@@ -1,5 +1,5 @@
 export const listStatusEnum = {
-	1: "ToWatch",
-	2: "Watching",
-	3: "Watched"
+  1: "To Watch",
+  2: "Watching",
+  3: "Watched",
 };
