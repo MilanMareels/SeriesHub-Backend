@@ -11,22 +11,7 @@ const router = express.Router();
 router.post("/anime", async (req, res) => {
   const { userId } = req.body;
   try {
-    validateBody(req, [
-      "animeTitle",
-      "description",
-      "genres",
-      "image",
-      "trailer",
-      "episodes",
-      "episodesDuration",
-      "listStatus",
-      "userId",
-      "status",
-      "season",
-      "score",
-      "source",
-      "format",
-    ]);
+    validateBody(req, ["animeTitle", "description", "genres", "image", "trailer", "episodesDuration", "listStatus", "userId", "status", "season", "score", "source", "format"]);
 
     await validateUser(userId);
 
@@ -41,22 +26,7 @@ router.post("/anime", async (req, res) => {
 });
 
 const createNewAnimeSerie = (req: any): AnimeSerie => {
-  const {
-    animeTitle,
-    description,
-    genres,
-    image,
-    trailer,
-    episodes,
-    episodesDuration,
-    listStatus,
-    userId,
-    status,
-    season,
-    score,
-    source,
-    format,
-  } = req.body;
+  const { animeTitle, description, genres, image, trailer, episodes, episodesDuration, listStatus, userId, status, season, score, source, format } = req.body;
   return {
     animeId: uuidv4(),
     animeTitle: animeTitle,
