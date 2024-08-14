@@ -11,7 +11,7 @@ const router = express.Router();
 router.post("/anime", async (req, res) => {
   const { userId } = req.body;
   try {
-    validateBody(req, ["animeTitle", "description", "genres", "image", "trailer", "episodesDuration", "listStatus", "userId", "status", "season", "score", "source", "format"]);
+    validateBody(req, ["animeTitle", "description", "genres", "image", "episodesDuration", "listStatus", "userId", "status", "season", "score", "source", "format"]);
 
     await validateUser(userId);
 
@@ -19,7 +19,7 @@ router.post("/anime", async (req, res) => {
 
     await queryAddAnimeToUserList(newAnimeSerie);
 
-    return createResponseObject(200, { message: "Anime successfully added to you list!" }, res);
+    return createResponseObject(200, { message: "Anime successfully added to your list!" }, res);
   } catch (error) {
     return handleErrors(error, res);
   }
