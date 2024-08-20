@@ -30,11 +30,11 @@ router.get("/user/:userId/AnimeSeries", async (req, res) => {
       query["animeTitle"] = { $regex: animeTitle, $options: "i" };
     }
 
-    const animeSeries: AnimeSerie[] = (await queryAllAnimeSeries(query, page)) as AnimeSerie[];
+    const myAnimeSeries: AnimeSerie[] = (await queryAllAnimeSeries(query, page)) as AnimeSerie[];
 
-    checkIfUserHasAnimeSeries(animeSeries, definedListStatus);
+    checkIfUserHasAnimeSeries(myAnimeSeries, definedListStatus);
 
-    return createResponseObject(200, animeSeries, res);
+    return createResponseObject(200, myAnimeSeries, res);
   } catch (error) {
     return handleErrors(error, res);
   }
@@ -53,8 +53,8 @@ const defineListStatus = (listStatus: string): string => {
   }
 };
 
-const checkIfUserHasAnimeSeries = (animeSeries: AnimeSerie[], definedListStatus: string) => {
-  if (animeSeries.length <= 0) throw new NotFoundError(errorMessages.userHasNoAnimeSeries(definedListStatus));
+const checkIfUserHasAnimeSeries = (myAnimeSeries: AnimeSerie[], definedListStatus: string) => {
+  if (myAnimeSeries.length <= 0) throw new NotFoundError(errorMessages.userHasNoAnimeSeries(definedListStatus));
 };
 
 export default router;
