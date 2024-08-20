@@ -2,7 +2,8 @@ import express from "express";
 
 import animeSeries from "./anime/getAllAnimeSeriesOfUser";
 import animeSerie from "./anime/getAnimeByAnimeId";
-import delteAnimeSerie from "./anime/deleteAnimeByAnimeId";
+import deleteAnimeSerie from "./anime/deleteAnimeByAnimeId";
+import updateAnimeSerie from "./anime/updateAnimeListStatus";
 import addAnimeSeries from "./anime/addAnimeToUserList";
 
 import register from "./users/register";
@@ -20,7 +21,8 @@ router.get("/", (req, res) => {
 // Anime end-points
 router.use(animeSeries);
 router.use(animeSerie);
-router.use(delteAnimeSerie);
+router.use(deleteAnimeSerie);
+router.use(updateAnimeSerie);
 router.use(addAnimeSeries);
 
 // User end-points

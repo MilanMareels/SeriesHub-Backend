@@ -7,19 +7,23 @@ import { queryAnimeByAnimeId } from "../../database/Anime/queryAnimeByAnimeId";
 import { NotFoundError } from "../../errors/error";
 import { errorMessages } from "../../errors/errorMessages";
 import { checkIfAnimeExists } from "../../checks/anime/animeChecks";
+import { queryUpdateAnimeListStatusByAnimeId } from "../../database/Anime/queryUpdateAnimeListSatusByAnimeId";
 
 const router = express.Router();
 
-router.get("/user/:userId/anime/:animeId", async (req, res) => {
-  const userId: string = req.params.userId;
-  const animeId: string = req.params.animeId;
+router.put("/myAnime", async (req, res) => {
+  const { userId, animeId, newListStatus } = req.body;
 
   try {
     await validateUser(userId);
 
-    const myAnimeSerie = await checkIfAnimeExists(animeId);
+    await checkIfAnimeExists(animeId);
 
-    return createResponseObject(200, myAnimeSerie, res);
+    await queryUpdateAnimeListStatusByAnimeId(animeId, newListStatus);
+
+    const myAnime = await queryAnimeByAnimeId(animeId);
+
+    return createResponseObject(200, myAnime, res);
   } catch (error) {
     return handleErrors(error, res);
   }

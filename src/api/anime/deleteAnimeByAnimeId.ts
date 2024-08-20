@@ -7,6 +7,7 @@ import { queryAnimeByAnimeId } from "../../database/Anime/queryAnimeByAnimeId";
 import { NotFoundError } from "../../errors/error";
 import { errorMessages } from "../../errors/errorMessages";
 import { queryDeleteAnimeByAnimeId } from "../../database/Anime/queryDeleteAnimeByAnimeId";
+import { checkIfAnimeExists } from "../../checks/anime/animeChecks";
 
 const router = express.Router();
 
@@ -17,8 +18,7 @@ router.delete("/user/:userId/anime/:animeId", async (req, res) => {
   try {
     await validateUser(userId);
 
-    const myAnimeSerie: AnimeSerie = (await queryAnimeByAnimeId(animeId)) as AnimeSerie;
-    checkIfAnimeExists(myAnimeSerie);
+    await checkIfAnimeExists(animeId);
 
     await queryDeleteAnimeByAnimeId(animeId);
 
@@ -27,11 +27,5 @@ router.delete("/user/:userId/anime/:animeId", async (req, res) => {
     return handleErrors(error, res);
   }
 });
-
-const checkIfAnimeExists = (myAnimeSerie: AnimeSerie) => {
-  if (!myAnimeSerie) {
-    throw new NotFoundError(errorMessages.animeNotFound);
-  }
-};
 
 export default router;
