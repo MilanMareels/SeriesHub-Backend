@@ -6,6 +6,7 @@ import addAnimeSeries from "./anime/addAnimeToUserList";
 
 import register from "./users/register";
 import login from "./users/login";
+import user from "./users/getUserByUserId";
 
 const router = express.Router();
 
@@ -23,5 +24,6 @@ router.use(addAnimeSeries);
 // User end-points
 router.use(register);
 router.use(login);
+router.use(user);
 
 export default router;
