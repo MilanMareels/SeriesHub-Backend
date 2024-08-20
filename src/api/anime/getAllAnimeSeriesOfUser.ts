@@ -55,6 +55,5 @@ const defineListStatus = (listStatus: string): string => {
 
 const checkIfUserHasAnimeSeries = (myAnimeSeries: AnimeSerie, definedListStatus: string) => {
   if (myAnimeSeries.animeSeries.length <= 0) throw new NotFoundError(errorMessages.userHasNoAnimeSeries(definedListStatus));
-};
-
+  
 export default router;
