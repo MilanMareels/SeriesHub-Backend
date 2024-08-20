@@ -5,7 +5,9 @@ import { errorMessages } from "../../errors/errorMessages";
 import { User } from "../../types/User/User";
 
 export const validateUser = async (userId: string) => {
-	const user: User = (await queryUserByUserId(userId)) as User;
+  const user: User = (await queryUserByUserId(userId)) as User;
 
-	if (isNullOrUndefined(user)) throw new NotFoundError(errorMessages.userNotFound);
+  if (isNullOrUndefined(user)) throw new NotFoundError(errorMessages.userNotFound);
+
+  return user;
 };

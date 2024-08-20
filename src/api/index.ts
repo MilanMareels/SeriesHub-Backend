@@ -1,10 +1,14 @@
 import express from "express";
 
 import animeSeries from "./anime/getAllAnimeSeriesOfUser";
+import animeSerie from "./anime/getAnimeByAnimeId";
+import deleteAnimeSerie from "./anime/deleteAnimeByAnimeId";
+import updateAnimeSerie from "./anime/updateAnimeListStatus";
 import addAnimeSeries from "./anime/addAnimeToUserList";
 
 import register from "./users/register";
 import login from "./users/login";
+import user from "./users/getUserByUserId";
 
 const router = express.Router();
 
@@ -16,10 +20,14 @@ router.get("/", (req, res) => {
 
 // Anime end-points
 router.use(animeSeries);
+router.use(animeSerie);
+router.use(deleteAnimeSerie);
+router.use(updateAnimeSerie);
 router.use(addAnimeSeries);
 
 // User end-points
 router.use(register);
 router.use(login);
+router.use(user);
 
 export default router;

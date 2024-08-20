@@ -11,8 +11,6 @@ const router = express.Router();
 router.post("/anime", async (req, res) => {
   const { userId } = req.body;
   try {
-    validateBody(req, ["animeTitle", "description", "genres", "image", "episodesDuration", "listStatus", "userId", "status", "season", "score", "source", "format"]);
-
     await validateUser(userId);
 
     const newAnimeSerie: AnimeSerie = createNewAnimeSerie(req);
