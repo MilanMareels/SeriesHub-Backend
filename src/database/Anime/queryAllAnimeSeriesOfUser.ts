@@ -23,9 +23,7 @@ export const queryAllAnimeSeries = async (query: Query, page: number): Promise<A
 
     const nextPage = animeSeries.length > itemsPerPage;
 
-    if (nextPage) {
-      animeSeries.pop();
-    }
+    if (nextPage) animeSeries.pop();
 
     return {
       animeSeries,
