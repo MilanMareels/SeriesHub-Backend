@@ -1,6 +1,6 @@
 import express from "express";
 
-import { createResponseObject, handleErrors } from "../../common/common";
+import { createResponseObject, handleErrors, validateBody } from "../../common/common";
 import { validateUser } from "../../checks/users/userChecks";
 import { AnimeSerie } from "../../types/Anime/AnimeSerie";
 import { queryAnimeByAnimeId } from "../../database/Anime/queryAnimeByAnimeId";
@@ -15,6 +15,8 @@ router.put("/myAnime", async (req, res) => {
   const { userId, animeId, newListStatus } = req.body;
 
   try {
+    validateBody(req, ["userId", "animeId", "newListStatus"]);
+
     await validateUser(userId);
 
     await checkIfAnimeExists(animeId);
