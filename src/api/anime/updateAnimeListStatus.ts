@@ -2,10 +2,7 @@ import express from "express";
 
 import { createResponseObject, handleErrors, validateBody } from "../../common/common";
 import { validateUser } from "../../checks/users/userChecks";
-import { AnimeSerie } from "../../types/Anime/AnimeSerie";
 import { queryAnimeByAnimeId } from "../../database/Anime/queryAnimeByAnimeId";
-import { NotFoundError } from "../../errors/error";
-import { errorMessages } from "../../errors/errorMessages";
 import { checkIfAnimeExists } from "../../checks/anime/animeChecks";
 import { queryUpdateAnimeListStatusByAnimeId } from "../../database/Anime/queryUpdateAnimeListSatusByAnimeId";
 

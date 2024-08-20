@@ -3,7 +3,7 @@ import express from "express";
 import { createResponseObject, handleErrors } from "../../common/common";
 import { listStatusEnum } from "../../enums/listStatusEnum";
 import { queryAllAnimeSeries } from "../../database/Anime/queryAllAnimeSeriesOfUser";
-import { AnimeSerie } from "../../types/Anime/AnimeSerie";
+import { AnimeData, AnimeSerie } from "../../types/Anime/AnimeSerie";
 import { validateUser } from "../../checks/users/userChecks";
 import { NotFoundError } from "../../errors/error";
 import { errorMessages } from "../../errors/errorMessages";
@@ -30,7 +30,7 @@ router.get("/user/:userId/myAnimeSeries", async (req, res) => {
       query["animeTitle"] = { $regex: animeTitle, $options: "i" };
     }
 
-    const myAnimeSeries: AnimeSerie[] = (await queryAllAnimeSeries(query, page)) as AnimeSerie[];
+    const myAnimeSeries: AnimeSerie = (await queryAllAnimeSeries(query, page)) as AnimeSerie;
 
     checkIfUserHasAnimeSeries(myAnimeSeries, definedListStatus);
 
@@ -53,8 +53,8 @@ const defineListStatus = (listStatus: string): string => {
   }
 };
 
-const checkIfUserHasAnimeSeries = (myAnimeSeries: AnimeSerie[], definedListStatus: string) => {
-  if (myAnimeSeries.length <= 0) throw new NotFoundError(errorMessages.userHasNoAnimeSeries(definedListStatus));
+const checkIfUserHasAnimeSeries = (myAnimeSeries: AnimeSerie, definedListStatus: string) => {
+  if (myAnimeSeries.animeSeries.length <= 0) throw new NotFoundError(errorMessages.userHasNoAnimeSeries(definedListStatus));
 };
 
 export default router;
