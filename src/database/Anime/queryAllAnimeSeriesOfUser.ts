@@ -12,13 +12,25 @@ export const queryAllAnimeSeries = async (query: Query, page: number): Promise<A
   const itemsPerPage = 10;
   try {
     await connectDatabase();
-    return await client
+
+    const animeSeries = await client
       .db(database)
       .collection("AnimeSeries")
       .find(query)
       .skip((page - 1) * itemsPerPage)
-      .limit(itemsPerPage)
+      .limit(itemsPerPage + 1)
       .toArray();
+
+    const nextPage = animeSeries.length > itemsPerPage;
+
+    if (nextPage) {
+      animeSeries.pop();
+    }
+
+    return {
+      animeSeries,
+      nextPage,
+    };
   } catch (error) {
     return error;
   } finally {

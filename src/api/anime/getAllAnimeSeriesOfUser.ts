@@ -11,7 +11,7 @@ import { Query } from "../../types/Anime/Query";
 
 const router = express.Router();
 
-router.get("/user/:userId/AnimeSeries", async (req, res) => {
+router.get("/user/:userId/myAnimeSeries", async (req, res) => {
   const userId: string = req.params.userId;
   const page = parseInt(req.query.page as string) || 1;
   const listStatus: string = (req.query.listStatus as string) || "2";
