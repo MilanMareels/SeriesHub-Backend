@@ -8,11 +8,8 @@ const client = new MongoClient(uri);
 
 export const queryDeleteAnimeByAnimeId = async (animeId: string): Promise<unknown> => {
   try {
-    await connectDatabase();
     return await client.db(database).collection("AnimeSeries").deleteOne({ animeId: animeId });
   } catch (error) {
     return error;
-  } finally {
-    await closeDatabase();
   }
 };

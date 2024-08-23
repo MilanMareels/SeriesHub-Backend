@@ -9,11 +9,8 @@ const client = new MongoClient(uri);
 
 export const queryAddUser = async (newUser: User) => {
   try {
-    await connectDatabase();
     await client.db(database).collection("Users").insertOne(newUser);
   } catch (error) {
     return error;
-  } finally {
-    await closeDatabase();
   }
 };

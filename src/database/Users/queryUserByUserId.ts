@@ -9,11 +9,8 @@ const client = new MongoClient(uri);
 
 export const queryUserByUserId = async (userId: string): Promise<User | unknown> => {
   try {
-    await connectDatabase();
     return await client.db(database).collection("Users").findOne({ userId: userId });
   } catch (error) {
     return error;
-  } finally {
-    await closeDatabase();
   }
 };

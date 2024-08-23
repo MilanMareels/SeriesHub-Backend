@@ -9,11 +9,8 @@ const client = new MongoClient(uri);
 
 export const queryAddAnimeToUserList = async (newAnimeSerie: AnimeData): Promise<unknown> => {
   try {
-    await connectDatabase();
     return await client.db(database).collection("AnimeSeries").insertOne(newAnimeSerie);
   } catch (error) {
     return error;
-  } finally {
-    await closeDatabase();
   }
 };

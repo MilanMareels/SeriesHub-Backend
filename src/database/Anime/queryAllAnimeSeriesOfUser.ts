@@ -11,7 +11,6 @@ const client = new MongoClient(uri);
 export const queryAllAnimeSeries = async (query: Query, page: number): Promise<AnimeSerie[] | unknown> => {
   const itemsPerPage = 10;
   try {
-    await connectDatabase();
     const animeSeries = await client
       .db(database)
       .collection("AnimeSeries")
@@ -31,7 +30,5 @@ export const queryAllAnimeSeries = async (query: Query, page: number): Promise<A
     };
   } catch (error) {
     return error;
-  } finally {
-    await closeDatabase();
   }
 };

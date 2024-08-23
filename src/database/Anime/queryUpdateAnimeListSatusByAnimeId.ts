@@ -8,14 +8,11 @@ const client = new MongoClient(uri);
 
 export const queryUpdateAnimeListStatusByAnimeId = async (animeId: string, newListStatus: string): Promise<unknown> => {
   try {
-    await connectDatabase();
     await client
       .db(database)
       .collection("AnimeSeries")
       .updateOne({ animeId: animeId }, { $set: { listStatus: newListStatus } });
   } catch (error) {
     return error;
-  } finally {
-    await closeDatabase();
   }
 };

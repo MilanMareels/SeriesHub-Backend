@@ -9,11 +9,8 @@ const client = new MongoClient(uri);
 
 export const queryAnimeByAnimeId = async (animeId: string): Promise<AnimeData | unknown> => {
   try {
-    await connectDatabase();
     return await client.db(database).collection("AnimeSeries").findOne({ animeId: animeId });
   } catch (error) {
     return error;
-  } finally {
-    await closeDatabase();
   }
 };
