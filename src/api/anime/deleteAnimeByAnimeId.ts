@@ -2,10 +2,6 @@ import express from "express";
 
 import { createResponseObject, handleErrors } from "../../common/common";
 import { validateUser } from "../../checks/users/userChecks";
-import { AnimeSerie } from "../../types/Anime/AnimeSerie";
-import { queryAnimeByAnimeId } from "../../database/Anime/queryAnimeByAnimeId";
-import { NotFoundError } from "../../errors/error";
-import { errorMessages } from "../../errors/errorMessages";
 import { queryDeleteAnimeByAnimeId } from "../../database/Anime/queryDeleteAnimeByAnimeId";
 import { checkIfAnimeExists } from "../../checks/anime/animeChecks";
 
