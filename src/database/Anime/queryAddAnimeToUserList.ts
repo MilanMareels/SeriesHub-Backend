@@ -1,12 +1,15 @@
 import "dotenv/config";
 import { AnimeData } from "../../types/Anime/AnimeSerie";
-import { db } from "../db";
+import { MongoClient } from "mongodb";
+
+const uri: string = process.env.MONGO_CONNECT_URL!;
+const database: string = process.env.DATABASE!;
+const client = new MongoClient(uri);
 
 export const queryAddAnimeToUserList = async (newAnimeSerie: AnimeData): Promise<unknown> => {
   try {
-    await db.collection("anime_series").insertOne(newAnimeSerie);
+    return await client.db(database).collection("AnimeSeries").insertOne(newAnimeSerie);
   } catch (error) {
     return error;
-  } finally {
   }
 };

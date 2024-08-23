@@ -9,13 +9,21 @@ import addAnimeSeries from "./anime/addAnimeToUserList";
 import register from "./users/register";
 import login from "./users/login";
 import user from "./users/getUserByUserId";
+import { closeDatabase, connectDatabase } from "../database/db";
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.json({
-    message: "API V1 SeriesHub",
-  });
+router.get("/", async (req, res) => {
+  try {
+    await connectDatabase();
+    return res.json({
+      message: "API V1 SeriesHub",
+    });
+  } catch (error) {
+    return error;
+  } finally {
+    await closeDatabase();
+  }
 });
 
 // Anime end-points
