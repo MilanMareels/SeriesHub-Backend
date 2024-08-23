@@ -11,7 +11,7 @@ export const queryUpdateAnimeListStatusByAnimeId = async (animeId: string, newLi
     await connectDatabase();
     await client
       .db(database)
-      .collection("anime_series")
+      .collection("AnimeSeries")
       .updateOne({ animeId: animeId }, { $set: { listStatus: newListStatus } });
   } catch (error) {
     return error;
