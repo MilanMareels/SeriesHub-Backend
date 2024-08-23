@@ -1,7 +1,6 @@
 import "dotenv/config";
 import { AnimeSerie } from "../../types/Anime/AnimeSerie";
 import { Query } from "../../types/Anime/Query";
-import { closeDatabase, connectDatabase } from "../db";
 import { MongoClient } from "mongodb";
 
 const uri: string = process.env.MONGO_CONNECT_URL!;
