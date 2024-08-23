@@ -5,12 +5,12 @@ const uri: string = process.env.MONGO_CONNECT_URL!;
 const database: string = process.env.DATABASE!;
 const client = new MongoClient(uri);
 
-export const queryUserByEmailOrUserName = async (email: string, userName: string) => {
+export const queryUpdateAnimeListStatusByAnimeId = async (animeId: string, newListStatus: string): Promise<unknown> => {
   try {
-    return await client
+    await client
       .db(database)
-      .collection("Users")
-      .findOne({ $or: [{ email: email }, { userName: userName }] });
+      .collection("AnimeSeries")
+      .updateOne({ animeId: animeId }, { $set: { listStatus: newListStatus } });
   } catch (error) {
     return error;
   }

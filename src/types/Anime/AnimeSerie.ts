@@ -1,6 +1,9 @@
-import { ObjectId } from "mongodb";
-
 export interface AnimeSerie {
+  animeSeries: AnimeData[];
+  nextPage: boolean;
+}
+
+export interface AnimeData {
   animeId: string;
   animeTitle: string;
   description: string;
