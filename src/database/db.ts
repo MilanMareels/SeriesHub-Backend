@@ -1,8 +1,9 @@
-import { DataAPIClient } from "@datastax/astra-db-ts";
+import { MongoClient } from "mongodb";
 import "dotenv/config";
 
-const astra_token = process.env.ASTRATOKEN!;
-const dataBase = process.env.DATABASE!;
+const uri: string = process.env.MONGO_CONNECT_URL!;
+const client = new MongoClient(uri);
 
-const client = new DataAPIClient(astra_token);
-export const db = client.db(dataBase);
+export const connectDatabase = async () => await client.connect();
+
+export const closeDatabase = async () => await client.close();
